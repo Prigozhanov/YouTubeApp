@@ -25,8 +25,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationItem.titleView = titleLabel
         collectionView.register(VideoCell.self, forCellWithReuseIdentifier: "CellId")
         
+        collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         setupMenuBar()
     }
+    
     
     let menuBar: MenuBar = {
        let mb = MenuBar()
