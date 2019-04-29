@@ -26,6 +26,17 @@ class BaseCell: UICollectionViewCell {
 }
 
 class VideoCell: BaseCell {
+    var video: Video? {
+        didSet {
+            titleLabel.text = video?.title
+            thumnailImageView.image = video?.thumbnailImage
+            if let profileImage = video?.channel?.profileImage {
+                userProfileImageView.image = profileImage
+                subtitleTextView.text = video?.channel?.name
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()

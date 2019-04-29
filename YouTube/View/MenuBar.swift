@@ -11,7 +11,7 @@ import UIKit
 class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     let cellId = "cellId"
     
-    let imageNames: [UIImage] = [#imageLiteral(resourceName: "home"),#imageLiteral(resourceName: "trending"),#imageLiteral(resourceName: "subscriptions"),#imageLiteral(resourceName: "account")]
+    let imageNames: [UIImage] = [#imageLiteral(resourceName: "home"),#imageLiteral(resourceName: "trending"),#imageLiteral(resourceName: "subscriptions"),#imageLiteral(resourceName: "account")].map { $0.withRenderingMode(.alwaysTemplate) }
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -30,6 +30,8 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
         
+        let selectedIndexPath = IndexPath(item: 0, section: 0)
+        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .centeredHorizontally)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,6 +45,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
         cell.imageView.image = imageNames[indexPath.row]
+        cell.tintColor = UIColor.rgb(red: 91, green: 14, blue: 13)
         return cell
     }
     
@@ -61,9 +64,23 @@ class MenuCell: BaseCell {
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.image = UIImage(named: "")?.withRenderingMode(.alwaysTemplate)
+        iv.tintColor = UIColor.rgb(red: 91, green: 14, blue: 13)
         return iv
     }()
 
+    override var isHighlighted: Bool {
+        didSet {
+            imageView.tintColor = isHighlighted ? .white : UIColor.rgb(red: 91, green: 14, blue: 13)
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            imageView.tintColor = isSelected ? .white : UIColor.rgb(red: 91, green: 14, blue: 13)
+        }
+    }
+    
     override func setupViews() {
         super.setupViews()
         addSubview(imageView)
