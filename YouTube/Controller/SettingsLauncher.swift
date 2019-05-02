@@ -8,10 +8,29 @@
 
 import UIKit
 
+class Setting: NSObject {
+    let name: String
+    let image: UIImage
+    
+    init(name: String, image: UIImage) {
+        self.name = name
+        self.image = image
+    }
+}
+
 class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     let cellId = "cellId"
+    let cellHeight: CGFloat = 50
     
+    let settings: [Setting] = [
+         Setting(name: "Settings", image: #imageLiteral(resourceName: "settings")),
+         Setting(name: "Terms & privacy policy", image: #imageLiteral(resourceName: "privacy")),
+         Setting(name: "Send Feedback", image: #imageLiteral(resourceName: "feedback")),
+         Setting(name: "Help", image: #imageLiteral(resourceName: "help")),
+         Setting(name: "Switch Account", image: #imageLiteral(resourceName: "switch_account")),
+         Setting(name: "Cancel", image: #imageLiteral(resourceName: "cancel"))
+    ]
     
     override init() {
         super.init()
@@ -19,7 +38,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(SettingCell.self, forCellWithReuseIdentifier: cellId)
         
     }
     
@@ -28,11 +47,12 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return settings.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SettingCell
+        cell.setting = settings[indexPath.row]
         return cell
     }
     
@@ -51,6 +71,12 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         
         if let window = UIApplication.shared.keyWindow {
             
+            var safetyAreaHeight: CGFloat = 0
+            
+            if #available(iOS 11.0, *){
+                safetyAreaHeight = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+            }
+            
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             
             blackView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(handleDissmiss)))
@@ -58,7 +84,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
             window.addSubview(blackView)
             window.addSubview(collectionView)
             
-            let height: CGFloat = 200
+            let height: CGFloat = CGFloat(settings.count) * cellHeight + safetyAreaHeight
             let y = window.frame.height - height
             collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
             blackView.frame = window.frame
@@ -73,6 +99,14 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
             
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: cellHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
     @objc func handleDissmiss() {

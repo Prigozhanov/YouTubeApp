@@ -96,7 +96,6 @@ class VideoCell: BaseCell {
     
     let userProfileImageView: CustomImageView = {
         let image = CustomImageView()
-        image.image = #imageLiteral(resourceName: "profile")
         image.layer.cornerRadius = 22
         image.layer.masksToBounds = true
         image.contentMode = .scaleAspectFill
