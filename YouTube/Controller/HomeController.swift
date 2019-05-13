@@ -42,7 +42,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             }
             
             do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                let json = try JSONSerialization.jsonObject(with: data!, options: [])
                 self.videos = [Video]()
                 for dictionary in json as! [[String: Any]] {
                     let video = Video()
@@ -103,7 +103,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationItem.rightBarButtonItems = [moreButtonItem, searchBarButtonItem]
     }
 
-    let settingsLauncher = SettingsLauncher()
+    lazy var settingsLauncher: SettingsLauncher = {
+        let launcher = SettingsLauncher()
+        launcher.homeController = self
+        return launcher
+    }()
     
     @objc func handleSearch() {
         print(123)
@@ -111,6 +115,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     @objc func handleMore() {
         settingsLauncher.showSettings()
+    }
+    
+    func showController(for setting: Setting) {
+        let dummySettingsViewController = UIViewController()
+        dummySettingsViewController.view.backgroundColor = .white
+        dummySettingsViewController.navigationItem.title = setting.name
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.pushViewController(dummySettingsViewController, animated: false)
     }
     
     private func setupMenuBar() {

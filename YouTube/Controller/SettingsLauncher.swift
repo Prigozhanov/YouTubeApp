@@ -110,11 +110,27 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     }
     
     @objc func handleDissmiss() {
-        UIView.animate(withDuration: 0.5) {
+        closeSettings(setting: nil)
+    }
+    
+    func closeSettings(setting: Setting?) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.blackView.alpha = 0
             if let window = UIApplication.shared.keyWindow {
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
             }
+        }) { (completed: Bool) in
+            if let setting = setting, setting.name != "Cancel" {
+                self.homeController?.showController(for: setting)
+            }
         }
+    }
+    
+    var homeController: HomeController?
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let setting = self.settings[indexPath.item]
+        closeSettings(setting: settings[indexPath.row])
+        print(setting.name)
     }
 }
