@@ -9,13 +9,22 @@
 import UIKit
 
 class Setting: NSObject {
-    let name: String
+    let name: SettingName
     let image: UIImage
     
-    init(name: String, image: UIImage) {
+    init(name: SettingName, image: UIImage) {
         self.name = name
         self.image = image
     }
+}
+
+enum SettingName: String {
+    case Cancel = "Cancel"
+    case Terms = "Terms & privacy policy"
+    case Feedback = "Send Feedback"
+    case Help = "Help"
+    case SwitchAccount = "Switch Account"
+    case Settings = "Settings"
 }
 
 class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -24,12 +33,12 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     let cellHeight: CGFloat = 50
     
     let settings: [Setting] = [
-         Setting(name: "Settings", image: #imageLiteral(resourceName: "settings")),
-         Setting(name: "Terms & privacy policy", image: #imageLiteral(resourceName: "privacy")),
-         Setting(name: "Send Feedback", image: #imageLiteral(resourceName: "feedback")),
-         Setting(name: "Help", image: #imageLiteral(resourceName: "help")),
-         Setting(name: "Switch Account", image: #imageLiteral(resourceName: "switch_account")),
-         Setting(name: "Cancel", image: #imageLiteral(resourceName: "cancel"))
+         Setting(name: .Settings, image: #imageLiteral(resourceName: "settings")),
+         Setting(name: .Terms, image: #imageLiteral(resourceName: "privacy")),
+         Setting(name: .Feedback, image: #imageLiteral(resourceName: "feedback")),
+         Setting(name: .Help, image: #imageLiteral(resourceName: "help")),
+         Setting(name: .SwitchAccount, image: #imageLiteral(resourceName: "switch_account")),
+         Setting(name: .Cancel, image: #imageLiteral(resourceName: "cancel"))
     ]
     
     override init() {
@@ -120,7 +129,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
             }
         }) { (completed: Bool) in
-            if let setting = setting, setting.name != "Cancel" {
+            if let setting = setting, setting.name != .Cancel {
                 self.homeController?.showController(for: setting)
             }
         }

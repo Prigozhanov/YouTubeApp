@@ -32,6 +32,17 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         
         let selectedIndexPath = IndexPath(item: 0, section: 0)
         collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .centeredHorizontally)
+        
+        setupHorizontalBar()
+    }
+    
+    func setupHorizontalBar() {
+        let horizontalBarView = UIView()
+        horizontalBarView.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        addSubview(horizontalBarView)
+        horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
     }
     
     required init?(coder aDecoder: NSCoder) {

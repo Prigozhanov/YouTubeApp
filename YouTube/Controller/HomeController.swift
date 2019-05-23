@@ -9,27 +9,6 @@
 import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
-//    var videos: [Video] = {
-//       var kanyeChannel = Channel()
-//        kanyeChannel.name = "KanyuIsTheBest"
-//        kanyeChannel.profileImage = #imageLiteral(resourceName: "kanye_profile")
-//
-//       var blankSpaceVideo = Video()
-//        blankSpaceVideo.title = "Earth Vevo - Blank Space"
-//        blankSpaceVideo.thumbnailImage = #imageLiteral(resourceName: "hqdefault")
-//        blankSpaceVideo.channel = kanyeChannel
-//        blankSpaceVideo.numberOfViews = 219256871
-//
-//        var badBloodVideo = Video()
-//        badBloodVideo.title = "Taylor Swift - Bad Blood feat. Kendrik labar"
-//        badBloodVideo.thumbnailImage = #imageLiteral(resourceName: "taylor_swift_bad_blood")
-//        badBloodVideo.channel = kanyeChannel
-//        badBloodVideo.numberOfViews = 512581301
-//
-//        return [blankSpaceVideo, badBloodVideo]
-//    }()
-    
     
     var videos: [Video]?
     
@@ -79,7 +58,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationController?.navigationBar.isTranslucent = false
         collectionView?.backgroundColor = UIColor.white
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
-        titleLabel.text = "Home"
+        titleLabel.text = "  Home"
         titleLabel.textColor = .white
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
@@ -120,15 +99,25 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func showController(for setting: Setting) {
         let dummySettingsViewController = UIViewController()
         dummySettingsViewController.view.backgroundColor = .white
-        dummySettingsViewController.navigationItem.title = setting.name
+        dummySettingsViewController.navigationItem.title = setting.name.rawValue
         navigationController?.navigationBar.tintColor = .white
         navigationController?.pushViewController(dummySettingsViewController, animated: false)
     }
     
     private func setupMenuBar() {
+        navigationController?.hidesBarsOnSwipe = true
+        
+        let redView = UIView()
+        redView.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        view.addSubview(redView)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: redView)
+        view.addConstraintsWithFormat(format: "V:|[v0(50)]|", views: redView)
+        
         view.addSubview(menuBar)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
-        view.addConstraintsWithFormat(format: "V:|[v0(50)]", views: menuBar)
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: menuBar)
+        
+        menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
