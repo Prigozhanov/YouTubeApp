@@ -12,6 +12,7 @@
 		04582AAE229815A3007089C9 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04582AAD229815A3007089C9 /* FeedCell.swift */; };
 		04582AB02298367F007089C9 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04582AAF2298367F007089C9 /* TrendingCell.swift */; };
 		04582AB2229C0071007089C9 /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04582AB1229C0071007089C9 /* SubscriptionCell.swift */; };
+		04582AB4229EC032007089C9 /* VideoLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04582AB3229EC032007089C9 /* VideoLauncher.swift */; };
 		04ED4A55227755CB00DEF127 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED4A54227755CB00DEF127 /* Video.swift */; };
 		04ED4A572279E84D00DEF127 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED4A562279E84D00DEF127 /* SettingsLauncher.swift */; };
 		04ED4A59227ACC5E00DEF127 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED4A58227ACC5E00DEF127 /* SettingCell.swift */; };
@@ -29,6 +30,7 @@
 		04582AAD229815A3007089C9 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		04582AAF2298367F007089C9 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		04582AB1229C0071007089C9 /* SubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCell.swift; sourceTree = "<group>"; };
+		04582AB3229EC032007089C9 /* VideoLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLauncher.swift; sourceTree = "<group>"; };
 		04ED4A54227755CB00DEF127 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		04ED4A562279E84D00DEF127 /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		04ED4A58227ACC5E00DEF127 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				E75C5CCD226D1CBA00C998EA /* Extensions.swift */,
+				04582AB3229EC032007089C9 /* VideoLauncher.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				E75C5CD1226D1D1B00C998EA /* VideoCell.swift in Sources */,
 				04ED4A572279E84D00DEF127 /* SettingsLauncher.swift in Sources */,
 				E75C5CCE226D1CBA00C998EA /* Extensions.swift in Sources */,
+				04582AB4229EC032007089C9 /* VideoLauncher.swift in Sources */,
 				04582AAC2297F4E6007089C9 /* ApiService.swift in Sources */,
 				E765A2C522513B7000C2D6B0 /* AppDelegate.swift in Sources */,
 				04ED4A59227ACC5E00DEF127 /* SettingCell.swift in Sources */,
